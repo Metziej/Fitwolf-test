@@ -200,7 +200,7 @@ export default function SystemArchitect({ globalData, users, onUpdate, onUpdateU
                             <div className="bg-[#0a0a0a] border border-[#FFB800]/20 p-6 relative">
                                 <div className="flex justify-between items-center mb-6 border-b border-gray-800 pb-4">
                                     <h2 className="text-xl font-black text-[#FFB800] uppercase">Editing: {editingProgram.title}</h2>
-                                    <button onClick={() => setEditingProgram(null)} className="text-gray-500 hover:text-white text-[10px] uppercase font-black">Close Editor</button>
+                                    <button translate="no" onClick={() => setEditingProgram(null)} className="text-gray-500 hover:text-white text-[10px] uppercase font-black">Sluiten</button>
                                 </div>
                                 <div className="grid grid-cols-2 gap-4 mb-8">
                                     <div className="space-y-1">
@@ -290,7 +290,7 @@ export default function SystemArchitect({ globalData, users, onUpdate, onUpdateU
                                                     </select>
                                                 </div>
 
-                                                <button onClick={() => setEditingDay(null)} className="w-full border border-gray-700 py-4 mt-4 text-white font-black uppercase tracking-widest hover:bg-white hover:text-black">Close Config</button>
+                                                <button translate="no" onClick={() => setEditingDay(null)} className="w-full border border-gray-700 py-4 mt-4 text-white font-black uppercase tracking-widest hover:bg-white hover:text-black">Sluiten</button>
                                             </div>
                                         </div>
                                     </div>

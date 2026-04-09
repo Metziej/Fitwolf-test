@@ -227,7 +227,7 @@ export default function PersonalCommand({ profile, history, onSave, onBack }: Pe
                 <h2 className="text-[10px] text-[#FF2A2A] uppercase tracking-[0.3em] font-black">Command Node</h2>
                 <h1 className="text-xl text-white uppercase font-black italic tracking-tighter">{profile.username}</h1>
              </div>
-             <button onClick={onBack} className="border border-[#333] px-4 py-2 text-[10px] uppercase font-black hover:bg-white hover:text-black transition-all">Close</button>
+             <button translate="no" onClick={onBack} className="border border-[#333] px-4 py-2 text-[10px] uppercase font-black hover:bg-white hover:text-black transition-all">Sluiten</button>
           </header>
 
           <nav className="flex border-b border-[#222] overflow-x-auto no-scrollbar">
@@ -426,8 +426,8 @@ export default function PersonalCommand({ profile, history, onSave, onBack }: Pe
                     
                     <div><label className="text-[9px] uppercase text-[#FF2A2A] font-black">New Objective</label>
                     <select value={formData.goal} onChange={e => setFormData({...formData, goal: e.target.value as Goal})} className="w-full bg-black border border-[#222] p-3 text-white outline-none focus:border-[#FF2A2A] text-[10px] uppercase">
-                       <option value={Goal.CUT}>Cutting Phase</option>
-                       <option value={Goal.BULK}>Massing Phase</option>
+                       <option value={Goal.CUT}>Predator</option>
+                       <option value={Goal.BULK}>Juggernaut</option>
                     </select></div>
 
                     <button onClick={finalizeWizard} className="w-full bg-[#FF2A2A] text-black font-black py-4 uppercase tracking-[0.5em] shadow-[0_0_20px_#FF2A2A]">Execute Calculation</button>

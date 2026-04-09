@@ -161,7 +161,7 @@ export default function App() {
           const userSnap = await getDoc(userRef);
 
           if (userSnap.exists()) {
-            const userData = userSnap.data() as UserProfile;
+            const userData = { ...userSnap.data() as UserProfile, id: user.uid };
 
             // isBanned check — gebande users worden direct uitgelogd
             if (userData.isBanned) {
@@ -410,9 +410,9 @@ export default function App() {
 
       const updatedUser = { ...userToUpdate, ...data };
 
-      // Firestore update (non-blocking for UI snappiness)
-      setDoc(doc(db, 'users', targetId), updatedUser, { merge: true })
-        .catch(error => handleFirestoreError(error, OperationType.WRITE, `users/${targetId}`));
+      // Firestore update (non-blocking for UI snappiness) — write only changed fields to avoid race conditions
+      setDoc(doc(db, 'users', targetId), data, { merge: true })
+        .catch(error => console.error('[FitWolf] updateProfile write failed:', error));
 
       return {
         ...prev, 
@@ -454,7 +454,7 @@ export default function App() {
             users: prev.users.map(u => u.id === userToUpdate.id ? updatedUser : u)
           }));
       } catch (err) {
-          handleFirestoreError(err, OperationType.WRITE, `users/${userToUpdate.id}`);
+          console.error('[FitWolf] saveStrProgress failed:', err);
       }
   };
 
@@ -488,7 +488,7 @@ export default function App() {
             users: prev.users.map(u => u.id === userToUpdate.id ? updatedUser : u)
           }));
       } catch (err) {
-          handleFirestoreError(err, OperationType.WRITE, `users/${userToUpdate.id}`);
+          console.error('[FitWolf] saveVitProgress failed:', err);
       }
   };
 
@@ -522,7 +522,7 @@ export default function App() {
             users: prev.users.map(u => u.id === userToUpdate.id ? updatedUser : u)
           }));
       } catch (err) {
-          handleFirestoreError(err, OperationType.WRITE, `users/${userToUpdate.id}`);
+          console.error('[FitWolf] saveIntProgress failed:', err);
       }
   };
 

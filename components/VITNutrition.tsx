@@ -262,7 +262,7 @@ export default function VITNutrition({ profile, checkedMeals: initialChecked, cu
           <div className="fixed inset-0 bg-black/95 z-[100] overflow-y-auto p-4 flex flex-col">
               <div className="flex justify-between items-center mb-6 mt-8">
                   <h2 className="text-xl font-black uppercase tracking-widest text-[#FF2A2A]">Weekly Logistics</h2>
-                  <button onClick={() => setShowWeeklyPlan(false)} className="text-white font-black uppercase text-xs">Close [X]</button>
+                  <button translate="no" onClick={() => setShowWeeklyPlan(false)} className="text-white font-black uppercase text-xs">Sluiten [X]</button>
               </div>
 
               <div className="flex gap-4 mb-6">
@@ -422,7 +422,7 @@ export default function VITNutrition({ profile, checkedMeals: initialChecked, cu
                   <h3 className="text-xs uppercase font-bold text-gray-500 mb-2">Execution (Preparation)</h3>
                   <p className="text-xs text-gray-300 leading-relaxed font-mono mb-6">{selectedMeal.preparation || "No tactical instructions available."}</p>
 
-                  <button onClick={() => setSelectedMeal(null)} className="w-full py-3 bg-[#00FF88] text-black font-black uppercase text-xs">Close Intel</button>
+                  <button translate="no" onClick={() => setSelectedMeal(null)} className="w-full py-3 bg-[#00FF88] text-black font-black uppercase text-xs">Sluiten</button>
               </div>
           </div>
       )}

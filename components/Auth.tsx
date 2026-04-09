@@ -35,7 +35,7 @@ export default function Auth({ onLogin }: AuthProps) {
         try {
           const userDoc = await getDoc(doc(db, 'users', user.uid));
           if (userDoc.exists()) {
-            onLogin(userDoc.data() as UserProfile);
+            onLogin({ ...userDoc.data() as UserProfile, id: user.uid });
           } else {
             // If profile doesn't exist for some reason, create a default one
             const defaultProfile: UserProfile = {

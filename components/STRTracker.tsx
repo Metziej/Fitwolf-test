@@ -354,7 +354,7 @@ export default function STRTracker({ currentWorkout, history, unitSystem, curren
       {activeVideo && (
          <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-4">
              <div className="w-full max-w-3xl aspect-video relative border border-[#FF2A2A]">
-                 <button onClick={() => setActiveVideo(null)} className="absolute -top-10 right-0 text-white font-black uppercase text-xs">Close Feed [X]</button>
+                 <button translate="no" onClick={() => setActiveVideo(null)} className="absolute -top-10 right-0 text-white font-black uppercase text-xs">Sluiten [X]</button>
                  <iframe src={activeVideo} className="w-full h-full" frameBorder="0" allow="autoplay; encrypted-media" allowFullScreen></iframe>
              </div>
          </div>

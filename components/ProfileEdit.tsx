@@ -111,7 +111,7 @@ export default function ProfileEdit({ profile, onSave, onBack, onLogout, onNavig
             <h2 className="text-xs uppercase tracking-[0.5em] text-[#FF2A2A] mb-1 font-bold">System Settings</h2>
             <h1 className="text-3xl font-black uppercase tracking-tighter text-white">COMMAND OVERRIDE</h1>
         </div>
-        <button onClick={onBack} className="text-gray-500 hover:text-white text-xs uppercase tracking-widest font-black">Close</button>
+        <button translate="no" onClick={onBack} className="text-gray-500 hover:text-white text-xs uppercase tracking-widest font-black">Sluiten</button>
       </header>
 
       <div className="space-y-12">

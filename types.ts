@@ -243,6 +243,7 @@ export interface UserProfile {
   referralCode?: string;     // Unieke code van deze user
   referredBy?: string;       // Referral code van wie hem uitnodigde
   referralCount?: number;    // Hoeveel mensen hij heeft uitgenodigd
+  allies?: string[];         // UIDs van toegevoegde bondgenoten
   subscriptionId?: string;   // Stripe subscription ID (voor managed subscriptions)
   onboardingEmailsSent?: string[]; // Welke dag-flows al verstuurd zijn (bijv. ["day0","day3"])
 }
