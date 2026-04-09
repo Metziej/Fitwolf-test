@@ -1,0 +1,66 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "User Profile",
+      "description": "Stores user biometric data, goals, and progress.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["HUNTER", "ADMIN"] },
+        "tierId": { "type": "string" },
+        "isBanned": { "type": "boolean" },
+        "weight": { "type": "number" },
+        "height": { "type": "number" },
+        "age": { "type": "number" },
+        "goal": { "type": "string", "enum": ["CUT", "BULK"] },
+        "units": { "type": "string", "enum": ["METRIC", "IMPERIAL"] },
+        "kcal": { "type": "number" },
+        "protein": { "type": "number" },
+        "carbs": { "type": "number" },
+        "fats": { "type": "number" },
+        "scaleRatio": { "type": "number" },
+        "activityLevel": { "type": "number" },
+        "characterConfig": {
+          "type": "object",
+          "properties": {
+            "headSize": { "type": "number" },
+            "muscleMass": { "type": "number" },
+            "height": { "type": "number" },
+            "eyeColor": { "type": "string" }
+          }
+        },
+        "stats": {
+          "type": "object",
+          "properties": {
+            "str": { "type": "number" },
+            "vit": { "type": "number" },
+            "int": { "type": "number" },
+            "recovery": { "type": "number" }
+          }
+        },
+        "dailyProgress": {
+          "type": "object",
+          "properties": {
+            "date": { "type": "string" },
+            "str": { "type": "object" },
+            "vit": { "type": "object" },
+            "int": { "type": "object" }
+          }
+        },
+        "shippingAddress": { "type": "string" },
+        "profilePic": { "type": "string" },
+        "phone": { "type": "string" },
+        "language": { "type": "string" }
+      },
+      "required": ["id", "username", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "UserProfile",
+      "description": "User profiles indexed by their Firebase Auth UID."
+    }
+  }
+}

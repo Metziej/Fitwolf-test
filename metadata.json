@@ -1,0 +1,8 @@
+{
+  "name": "FitWolf: Daily Command",
+  "description": "A gamified transformation system for anime fans, turning fitness into a high-stakes RPG experience with Mike Mentzer's Heavy Duty principles.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}

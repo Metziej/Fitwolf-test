@@ -1,0 +1,60 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+        (get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'ADMIN' ||
+         (request.auth.token.email == "michael.j.metz93@gmail.com" && request.auth.token.email_verified == true));
+    }
+
+    // ===============================================================
+    // Rules
+    // ===============================================================
+    
+    // System configuration is readable by anyone, but only writable by admins
+    match /system/config {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    // Test connection
+    match /test/connection {
+      allow read: if true;
+    }
+    
+    // User profiles
+    match /users/{userId} {
+      allow read: if isAuthenticated(); // Allow reading other users for guild/leaderboard
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId) || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // Guild chat — persistent berichten in Firestore
+    // Structuur: guild/main/messages/{messageId}
+    match /guild/{guildId}/messages/{messageId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated()
+        && request.resource.data.user is string
+        && request.resource.data.text is string;
+      allow delete: if isAdmin();
+      allow update: if isAdmin(); // Alleen admins mogen berichten bewerken
+    }
+
+    // Fallback
+    match /{document=**} {
+      allow read, write: if isAdmin();
+    }
+  }
+}
