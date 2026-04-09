@@ -1,22 +1,11 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, enableIndexedDbPersistence } from 'firebase/firestore';
+import { getFirestore } from 'firebase/firestore';
 import firebaseConfig from './firebase-applet-config.json';
 
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 export const db = getFirestore(app);
-
-// Offline persistence — zodat de app werkt zonder WiFi (bijv. in de sportschool)
-enableIndexedDbPersistence(db).catch((err) => {
-  if (err.code === 'failed-precondition') {
-    // Meerdere tabs open — persistence werkt alleen in één tab tegelijk
-    console.warn('[FitWolf] Offline persistence uitgeschakeld: meerdere tabs open.');
-  } else if (err.code === 'unimplemented') {
-    // Browser ondersteunt IndexedDB niet
-    console.warn('[FitWolf] Offline persistence niet ondersteund door deze browser.');
-  }
-});
 
 export enum OperationType {
   CREATE = 'create',
@@ -55,7 +44,7 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
       emailVerified: auth.currentUser?.emailVerified,
       isAnonymous: auth.currentUser?.isAnonymous,
       tenantId: auth.currentUser?.tenantId,
-      providerInfo: auth.currentUser?.providerData.map(provider => ({
+      providerInfo: auth.currentUser?.providerData.map((provider: { providerId: string; displayName: string | null; email: string | null; photoURL: string | null }) => ({
         providerId: provider.providerId,
         displayName: provider.displayName,
         email: provider.email,
@@ -66,5 +55,4 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
     path
   }
   console.error('Firestore Error: ', JSON.stringify(errInfo));
-  throw new Error(JSON.stringify(errInfo));
 }
